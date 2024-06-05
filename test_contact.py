@@ -30,7 +30,7 @@ def driver():
     login = driver.find_element(By.XPATH, '//button[@type="submit"]')
     login.click()
     yield driver
-    
+            
 # def test_create_contact_personal(driver):
 #     contact = driver.find_element(By.XPATH, '//a[@href="/dashboard/sales-contact"]').click()
 #     contact = driver.find_element(By.XPATH, '//img[@src="/assets/icons/plus-white.svg"]').click()
@@ -77,6 +77,16 @@ def test_create_contact_corporate(driver):
     # contact = driver.find_element(By.XPATH, '//button[@type="submit"]').click()
     # contact = driver.implicitly_wait(2)
     # contact = driver.find_element(By.CSS_SELECTOR, 'button.swal2-close').click()
+
+def test_create_contact_check_email_sudah_terdaftar(driver):
+    contact = driver.find_element(By.XPATH, '//a[@href="/dashboard/sales-contact"]').click()
+    contact = driver.find_element(By.XPATH, '//img[@src="/assets/icons/plus-white.svg"]').click()
+    contact = driver.find_element(By.CSS_SELECTOR, 'input#email').send_keys("shadow@avenged.com")
+    contact = driver.find_element(By.CSS_SELECTOR, 'input#name').send_keys("name")
+    contact = driver.find_element(By.XPATH, '//input[@name="contact_type"]').click()
+    contact = driver.find_element(By.XPATH, '//ul/li[1]').click()
+    contact = driver.find_element(By.XPATH, '//button[@type="submit"]').click()
+    contact = driver.find_element(By.XPATH, '//p[contains(text(),"The email has already been taken.")]').is_displayed()
 
     
     # driver.quit()
